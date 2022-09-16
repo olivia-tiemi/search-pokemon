@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="alternative-code.js" defer></script>
+</head>
+
+<body>
+    <div class="color-container">
+        <div class="inner-container">
+            <h3 class="seta" id="hidden">></h3>
+            <img class="poke-logo" src="./assets/logo-poke.png" alt="">
+            <input type="text" id="pokemon" placeholder="Quem é esse pokémon?">
+            <button class="buscar">BUSCAR</button>
+            <button class="limpar">LIMPAR</button>
+            <select id="version">
+                <option value="">Selecione</option>
+                <option value="Front">Front</option>
+                <option value="Back">Back</option>
+                <option value="Shiny">Shiny</option>
+                <option value="Animated">Animated</option>
+            </select>
+            <img class="poke-img" src="" alt="">
+            <h1></h1>
+            <div class="type">
+                <p class="type-one"></p>
+                <p class="type-two"></p>
+            </div>
+        </div>
+    </div>
+    <div class="color-container" id="hidden">
+        <div class="poke-container">
+            <div class="status">
+                <div class="each-status">
+                    <h2 class="hp"></h2>
+                    <span>HP</span>
+                </div>
+                <div class="each-status">
+                    <h2></h2>
+                    <span>ATT</span>
+                </div>
+                <div class="each-status">
+                    <h2></h2>
+                    <span>DEF</span>
+                </div>
+                <div class="each-status">
+                    <h2></h2>
+                    <span>SP. ATT</span>
+                </div>
+                <div class="each-status">
+                    <h2></h2>
+                    <span>SP. DEF</span>
+                </div>
+                <div class="each-status">
+                    <h2></h2>
+                    <span>SPEED</span>
+                </div>
+                <div class="each-status">
+                    <!-- <div class="abilities">
+
+                    </div> -->
+                </div>
+            </div>
+            <h1>IN THE EVOLUTION CHAIN...</h1>
+            <div class="poke-data">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

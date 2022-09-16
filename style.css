@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('assets/background-ditto.png');
+    background-image: url('background-ditto.png');
     background-size: cover;
     display: flex;
     justify-content: center;

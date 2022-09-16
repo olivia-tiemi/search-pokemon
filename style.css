@@ -159,7 +159,7 @@ p {
     justify-content: center;
     flex-wrap: wrap;
     gap: 50px;
-    width: 700px;
+    width: 500px;
     margin-bottom: 60px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -222,4 +222,17 @@ h2 {
 
 #hidden {
     display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .poke-container {
+        width: 500px;
+        min-height: 700px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    body {
+        flex-direction: column;
+    }
 }

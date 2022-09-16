@@ -45,7 +45,7 @@ let validaSeta = false;
 
 //event listener para o valor do input com nome ou número do pokémon
 searchButton.addEventListener('click', async () => {
-
+    versionOption.id = '';
     if (!pokemonInput.value)
         return;
 
@@ -106,6 +106,7 @@ clearButton.addEventListener('click', () => {
     //resetando para o card inicial
     pokemonInput.value = "";
     versionOption.value = "";
+    versionOption.id = 'hidden';
     pokeType[0].classList.remove('show');
     pokeType[1].classList.remove('show');
     imgPokemon.src = "";

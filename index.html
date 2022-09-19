@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon</title>
     <link rel="stylesheet" href="style.css">
-    <script src="alternative-code.js" defer></script>
+    <script src="./alternative-code.js" defer></script>
 </head>
 
 <body>
     <div class="color-container">
         <div class="inner-container">
             <h3 class="seta" id="hidden">></h3>
-            <img class="poke-logo" src="logo-poke.png" alt="">
+            <img class="poke-logo" src="./assets/logo-poke.png" alt="">
             <input type="text" id="pokemon" placeholder="Quem é esse pokémon?">
             <button class="buscar">BUSCAR</button>
             <button class="limpar">LIMPAR</button>
@@ -34,40 +34,64 @@
     </div>
     <div class="color-container" id="hidden">
         <div class="poke-container">
+            <h1>BASE STATS</h1>
             <div class="status">
-                <div class="each-status">
-                    <h2 class="hp"></h2>
-                    <span>HP</span>
+                <div class="status-left">
+                    <div class="each-status">
+                        <span>HP</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
+                    <div class="each-status">
+                        <span>ATT</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
+                    <div class="each-status">
+                        <span>DEF</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
                 </div>
-                <div class="each-status">
-                    <h2></h2>
-                    <span>ATT</span>
-                </div>
-                <div class="each-status">
-                    <h2></h2>
-                    <span>DEF</span>
-                </div>
-                <div class="each-status">
-                    <h2></h2>
-                    <span>SP. ATT</span>
-                </div>
-                <div class="each-status">
-                    <h2></h2>
-                    <span>SP. DEF</span>
-                </div>
-                <div class="each-status">
-                    <h2></h2>
-                    <span>SPEED</span>
-                </div>
-                <div class="each-status">
-                    <!-- <div class="abilities">
-
-                    </div> -->
+                <div class="status-right">
+                    <div class="each-status">
+                        <span>SP. ATT</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
+                    <div class="each-status">
+                        <span>SP. DEF</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
+                    <div class="each-status">
+                        <span>SPEED</span>
+                        <div class="align-status">
+                            <div class="bar"></div>
+                            <h2></h2>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h1>IN THE EVOLUTION CHAIN...</h1>
-            <div class="poke-data">
+            <h1>HABILITIES</h1>
+            <div class="abilities">
 
+            </div>
+            <div class="evolution-chart">
+                <h1>IN THE EVOLUTION CHAIN...</h1>
+                <div class="poke-data">
+
+                </div>
             </div>
         </div>
     </div>

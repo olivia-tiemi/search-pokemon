@@ -9,10 +9,11 @@ const pokeType = document.querySelectorAll(".type p"); //irá controlar o texto 
 const typeOne = document.querySelector(".type-one"); //colore o primeiro tipo do pokémon
 const typeTwo = document.querySelector(".type-two"); //colore o segundo tipo do pokémon
 const colorContainer = document.querySelectorAll(".color-container"); //colore o fundo do card 1 com a cor do primeiro tipo do pokémon
-const pokeData = document.querySelector(".poke-data"); //div que irá receber os dados do pokémon
-const seta = document.querySelector(".seta");
-const pokeStatus = document.querySelectorAll(".status h2");
-// const abilities = document.querySelector(".abilities");
+const pokeData = document.querySelector(".poke-data"); //div que irá receber as infos do pokémon
+const seta = document.querySelector(".seta"); //classe que faz aparecer a seta para expandir as infos do poké
+const statusBar = document.querySelectorAll(".bar"); //classe que controla a barra de cada stats
+const pokeStatus = document.querySelectorAll(".status h2"); //número correspondente a cada stats
+const abilities = document.querySelector(".abilities"); //div que comporta as habilidades do poké
 
 
 //array de cores por tipo do pokémon
@@ -41,11 +42,9 @@ let currentBody = {}; //guarda o body da primeira resposta para utilizar no even
 let id = 0; //guarda o id do pokémon para utilizar no fetch 2
 let url = ''; //guarda a url do pokémon para utilizar no fetch 3
 let urlArray = []; //guarda as url de cada pokéon da cadeia de evolução
-let validaSeta = false;
 
 //event listener para o valor do input com nome ou número do pokémon
 searchButton.addEventListener('click', async () => {
-    versionOption.id = '';
     if (!pokemonInput.value)
         return;
 
@@ -53,53 +52,65 @@ searchButton.addEventListener('click', async () => {
     clearButton.style.display = 'flex';
 
     //buscando o pokémon do input e suas propriedades
-    const resposta = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonInput.value.toLowerCase());
-    if (!resposta.ok) {
-        console.log("Erro");
-        return;
-    }
+    try {
+        const resposta = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonInput.value.toLowerCase());
 
-    imgPokemon.style.filter = 'brightness(0)';
-    const body = await resposta.json();
-    currentBody = body;
+        versionOption.id = '';
+        imgPokemon.style.filter = 'brightness(0)';
+        const body = await resposta.json();
+        currentBody = body;
 
-    //setta o nome e img do pokémon (inicialmente, irá aparecer preta)
-    id = body.id; //este id será utilizado para buscar uma página. Esta página irá fornecer a url da cadeia de evolução
-    nomePokemon.textContent = id + '-' + body.name.toUpperCase();
-    imgPokemon.src = body.sprites.front_default;
-    pokeStatus.forEach((status, index) => {
-        status.textContent = body.stats[index].base_stat;
-    })
+        //setta o nome e img do pokémon (inicialmente, irá aparecer preta)
+        id = body.id; //este id será utilizado para buscar uma página. Esta página irá fornecer a url da cadeia de evolução
+        nomePokemon.textContent = id + '-' + body.name.toUpperCase();
+        imgPokemon.src = body.sprites.front_default;
+        pokeStatus.forEach((status, index) => {
+            status.textContent = body.stats[index].base_stat;
+            for (let i = 1; i <= 255; i++) {
+                const bar = document.createElement('div');
+                bar.classList.add('one-bar');
+                if (i > status.textContent) {
+                    bar.style.backgroundColor = '#FFF';
+                }
 
-    // for (let ability of body.abilities) {
-    //     const h2 = document.createElement('h2');
-    //     h2.textContent = ability.ability.name.toUpperCase();
-    //     abilities.appendChild(h2);
-    // }
+                statusBar[index].appendChild(bar);
+            }
+        })
 
-    //o for a seguir controla os elementos do pokémon, inclusive suas cores e do card
-    body.types.forEach((type, index) => {
+        for (let ability of body.abilities) {
+            const h2 = document.createElement('h2');
+            h2.textContent = ability.ability.name.toUpperCase();
+            abilities.appendChild(h2);
+        }
 
-        pokeType[index].classList.add('show');
+        //o for a seguir controla os elementos do pokémon, inclusive suas cores e do card
+        body.types.forEach((type, index) => {
 
-        for (let item of typeColors) {
+            pokeType[index].classList.add('show');
 
-            if (item.type === type.type.name) {
+            for (let item of typeColors) {
 
-                if (index === 0) {
-                    typeOne.style.backgroundColor = item.color;
-                    root.style.setProperty('--element-color', item.color)
+                if (item.type === type.type.name) {
 
-                } else {
-                    typeTwo.style.backgroundColor = item.color;
+                    if (index === 0) {
+                        typeOne.style.backgroundColor = item.color;
+                        root.style.setProperty('--element-color', item.color)
 
+                    } else {
+                        typeTwo.style.backgroundColor = item.color;
+
+                    }
                 }
             }
-        }
-        pokeType[index].textContent = type.type.name.toUpperCase();
+            pokeType[index].textContent = type.type.name.toUpperCase();
 
-    })
-
+        })
+    } catch (err) {
+        versionOption.id = 'hidden';
+        console.log(err);
+        nomePokemon.textContent = 'Pokémon not found.'
+        return;
+    }
 })
 
 clearButton.addEventListener('click', () => {
@@ -117,7 +128,7 @@ clearButton.addEventListener('click', () => {
     urlArray = [];
     searchButton.style.display = 'flex';
     clearButton.style.display = 'none';
-    validaSeta = false;
+    seta.id = 'hidden';
 
     while (pokeData.childNodes[0]) {
         pokeData.childNodes[0].remove();
@@ -126,6 +137,12 @@ clearButton.addEventListener('click', () => {
     while (abilities.childNodes[0]) {
         abilities.childNodes[0].remove();
     }
+
+    statusBar.forEach(statusBar => {
+        while (statusBar.childNodes[0]) {
+            statusBar.childNodes[0].remove();
+        }
+    })
 })
 
 seta.addEventListener('click', async () => {
@@ -206,9 +223,8 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.front_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (!validaSeta) {
+        if (seta.id === 'hidden') {
             seta.id = '';
-            validaSeta = true;
         }
 
     } else if (versionOption.value === 'Back') {
@@ -216,9 +232,8 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.back_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (!validaSeta) {
+        if (seta.id === 'hidden') {
             seta.id = '';
-            validaSeta = true;
         }
 
     } else if (versionOption.value === 'Shiny') {
@@ -226,9 +241,8 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.front_shiny;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (!validaSeta) {
+        if (seta.id === 'hidden') {
             seta.id = '';
-            validaSeta = true;
         }
 
     } else if (versionOption.value === 'Animated') {
@@ -236,9 +250,8 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.versions["generation-v"]["black-white"].animated.front_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (!validaSeta) {
+        if (seta.id === 'hidden') {
             seta.id = '';
-            validaSeta = true;
         }
 
     } else {

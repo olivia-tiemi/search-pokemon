@@ -7,12 +7,13 @@
 }
 
 body {
-    background-image: url('background-ditto.png');
-    background-size: cover;
+    background-image: url('./assets/background-ditto.png');
+    background-size: contain;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 50px;
     font-family: 'Press Start 2P', cursive;
     --element-color: darkslategray;
 }
@@ -35,11 +36,13 @@ body {
     background-color: white;
     padding: 30px;
     border-bottom-right-radius: 15px;
-    border-top-left-radius: 200px;
+    border-top-left-radius: 15px;
     border-bottom-left-radius: 200px;
-    border-top-right-radius: 15px;
+    border-top-right-radius: 200px;
     position: relative;
-    height: 450px;
+    min-height: 470px;
+    width: 243px;
+    max-width: 100%;
 }
 
 .poke-logo {
@@ -82,7 +85,6 @@ select {
 
 .poke-img {
     margin-top: 20px;
-    max-width: 90px;
     filter: brightness(0);
     margin-bottom: 10px;
 }
@@ -90,7 +92,7 @@ select {
 h1 {
     font-size: 12px;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .type {
@@ -147,57 +149,87 @@ p {
     align-items: center;
     padding: 30px;
     border-bottom-right-radius: 200px;
-    border-top-left-radius: 15px;
+    border-top-left-radius: 200px;
     border-bottom-left-radius: 15px;
-    border-top-right-radius: 200px;
-    width: 700px;
-    height: 450px;
+    border-top-right-radius: 15px;
+    width: 500px;
+    max-width: 100%;
+    min-height: 450px;
 }
 
 .status {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     gap: 50px;
-    width: 500px;
     margin-bottom: 60px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.status-left,
+.status-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .status h2 {
-    font-size: 28px;
+    font-size: 12px;
     font-weight: 700;
-    color: #000;
-    text-shadow: 2px 1px 1px var(--element-color);
 }
 
 .each-status {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+}
+
+.align-status {
+    display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.each-status .hp {
-    color: var(--element-color);
-    text-shadow: 2px 1px 1px #000;
+.bar {
+    display: flex;
+    align-items: center;
+    height: 12px;
+    width: 130px;
+    border: 1px solid black;
 }
 
-/* .abilities {
-    display: flex;
-    gap: 10px;
-} */
-/* 
-.abilities h2 {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 12px;
-} */
+.one-bar {
+    width: 0.5px;
+    height: 10px;
+    background-color: var(--element-color);
+}
 
 span {
     display: block;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
+}
+
+.abilities {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.abilities h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+}
+
+.evolution-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
 }
 
 .poke-data {
@@ -224,15 +256,26 @@ h2 {
     display: none;
 }
 
-@media screen and (max-width: 768px) {
-    .poke-container {
-        width: 500px;
-        min-height: 700px;
+@media screen and (max-width: 750px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
     }
 }
 
-@media screen and (max-width: 320px) {
-    body {
+@media screen and (max-width: 500px) {
+    .poke-container {
+        width: 243px;
+        padding: 10px;
+    }
+
+    .status {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .abilities {
         flex-direction: column;
     }
 }

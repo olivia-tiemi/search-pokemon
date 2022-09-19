@@ -8,7 +8,7 @@
 
 body {
     background-image: url('background-ditto.png');
-    background-size: contain;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: flex-start;

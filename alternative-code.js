@@ -108,7 +108,6 @@ searchButton.addEventListener('click', async () => {
         })
     } catch (err) {
         versionOption.id = 'hidden';
-        console.log(err);
         nomePokemon.textContent = 'Pokémon not found.'
         return;
     }

@@ -42,6 +42,7 @@ let currentBody = {}; //guarda o body da primeira resposta para utilizar no even
 let id = 0; //guarda o id do pokémon para utilizar no fetch 2
 let url = ''; //guarda a url do pokémon para utilizar no fetch 3
 let urlArray = []; //guarda as url de cada pokéon da cadeia de evolução
+let validateSeta = false;
 
 //event listener para o valor do input com nome ou número do pokémon
 searchButton.addEventListener('click', async () => {
@@ -128,6 +129,7 @@ clearButton.addEventListener('click', () => {
     urlArray = [];
     searchButton.style.display = 'flex';
     clearButton.style.display = 'none';
+    validateSeta = false;
     seta.id = 'hidden';
 
     while (pokeData.childNodes[0]) {
@@ -223,8 +225,9 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.front_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (seta.id === 'hidden') {
+        if (!validateSeta) {
             seta.id = '';
+            validateSeta = true;
         }
 
     } else if (versionOption.value === 'Back') {
@@ -232,8 +235,9 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.back_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (seta.id === 'hidden') {
+        if (!validateSeta) {
             seta.id = '';
+            validateSeta = true;
         }
 
     } else if (versionOption.value === 'Shiny') {
@@ -241,8 +245,9 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.front_shiny;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (seta.id === 'hidden') {
+        if (!validateSeta) {
             seta.id = '';
+            validateSeta = true;
         }
 
     } else if (versionOption.value === 'Animated') {
@@ -250,8 +255,9 @@ versionOption.addEventListener('change', () => {
         imgPokemon.src = currentBody.sprites.versions["generation-v"]["black-white"].animated.front_default;
         imgPokemon.style.filter = 'brightness(100%)';
         imgPokemon.style.transition = 'ease-in 0.5s';
-        if (seta.id === 'hidden') {
+        if (!validateSeta) {
             seta.id = '';
+            validateSeta = true;
         }
 
     } else {

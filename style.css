@@ -33,6 +33,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    text-align: center;
     background-color: white;
     padding: 30px;
     border-bottom-right-radius: 15px;
